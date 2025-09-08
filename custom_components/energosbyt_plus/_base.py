@@ -388,7 +388,7 @@ class EnergosbytPlusEntity(Entity):
     def device_state_attributes(self):
         """Return the attribute(s) of the sensor"""
 
-        attributes = dict(self.extra_state_attributes or {})  # <- изменено здесь
+        attributes = dict(self.extra_state_attributes or {})
 
         if ATTR_ACCOUNT_ID not in attributes:
             attributes[ATTR_ACCOUNT_ID] = self._account.id
@@ -591,3 +591,4 @@ class EnergosbytPlusEntity(Entity):
                     self.platform.async_register_entity_service(
                         service, schema, "async_service_" + service, features
                     )
+
