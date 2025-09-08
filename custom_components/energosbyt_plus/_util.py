@@ -15,9 +15,8 @@ from typing import (
 from homeassistant import config_entries
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_USERNAME
-from homeassistant.core import callback
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import EntityPlatform
-from homeassistant.helpers.typing import HomeAssistantType
 
 from custom_components.energosbyt_plus.api import (
     EnergosbytPlusAPI,
@@ -45,7 +44,7 @@ def _make_log_prefix(
 
 @callback
 def _find_existing_entry(
-    hass: HomeAssistantType, type_: str, username: str
+    hass: HomeAssistant, type_: str, username: str
 ) -> Optional[config_entries.ConfigEntry]:
     existing_entries = hass.config_entries.async_entries(DOMAIN)
     for config_entry in existing_entries:
