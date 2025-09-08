@@ -20,7 +20,8 @@ from homeassistant.const import (
     STATE_ON,
     STATE_UNKNOWN,
 )
-from homeassistant.helpers.typing import ConfigType, HomeAssistantType, StateType
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType, StateType
 from homeassistant.util import slugify
 
 from custom_components.energosbyt_plus._base import (
@@ -75,7 +76,7 @@ class EnergosbytPlusLastPayment(EnergosbytPlusEntity, BinarySensorEntity):
     @classmethod
     async def async_refresh_account(
         cls: Type[_TEnergosbytPlusEntity],
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, _TEnergosbytPlusEntity],
         account: "Account",
         config_entry: ConfigEntry,
@@ -121,6 +122,10 @@ class EnergosbytPlusLastPayment(EnergosbytPlusEntity, BinarySensorEntity):
 
     @property
     def sensor_related_attributes(self) -> Optional[Mapping[str, Any]]:
+        return self.extra_state_attributes
+
+    @property
+    def extra_state_attributes(self) -> Optional[Mapping[str, Any]]:
         payment = self._last_payment
         dev_presentation_enabled = self.is_dev_presentation_enabled
 
