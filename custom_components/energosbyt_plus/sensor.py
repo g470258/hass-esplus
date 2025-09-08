@@ -31,7 +31,8 @@ from homeassistant.const import (
     STATE_OK,
     STATE_UNKNOWN,
 )
-from homeassistant.helpers.typing import ConfigType, HomeAssistantType
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
 from homeassistant.util import slugify
 
 from custom_components.energosbyt_plus._base import (
@@ -226,7 +227,7 @@ class EnergosbytPlusAccount(EnergosbytPlusEntity):
         return "руб."
 
     @property
-    def sensor_related_attributes(self) -> Optional[Mapping[str, Any]]:
+    def extra_state_attributes(self) -> Optional[Mapping[str, Any]]:
         account = self._account
 
         attributes = {
@@ -258,7 +259,7 @@ class EnergosbytPlusAccount(EnergosbytPlusEntity):
     @classmethod
     async def async_refresh_account(
         cls,
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, _TEnergosbytPlusEntity],
         account: "Account",
         config_entry: ConfigEntry,
@@ -327,7 +328,7 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
 
     @classmethod
     async def _collective_get_meter_data_for_account(
-        cls, hass: HomeAssistantType, account: Account
+        cls, hass: HomeAssistant, account: Account
     ):
         account_id = account.id
 
@@ -352,7 +353,7 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
     @classmethod
     async def async_refresh_account(
         cls,
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, Optional[_TEnergosbytPlusEntity]],
         account: "Account",
         config_entry: ConfigEntry,
@@ -451,7 +452,7 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
         return DOMAIN + "_meter"
 
     @property
-    def sensor_related_attributes(self) -> Optional[Mapping[str, Any]]:
+    def extra_state_attributes(self) -> Optional[Mapping[str, Any]]:
         meter = self._meter
         characteristics = self._characteristics
 
@@ -722,7 +723,7 @@ class _EnergosbytPlusChargesEntityBase(EnergosbytPlusEntity):
 
     @classmethod
     async def _collective_get_charges_data_for_account(
-        cls, hass: HomeAssistantType, account: Account
+        cls, hass: HomeAssistant, account: Account
     ):
         account_id = account.id
 
@@ -772,7 +773,7 @@ class EnergosbytPlusCharges(_EnergosbytPlusChargesEntityBase):
         return self._charges.charged
 
     @property
-    def sensor_related_attributes(self):
+    def extra_state_attributes(self):
         charges = self._charges
 
         if not charges:
@@ -839,7 +840,7 @@ class EnergosbytPlusCharges(_EnergosbytPlusChargesEntityBase):
     @classmethod
     async def async_refresh_account(
         cls: Type[_TEnergosbytPlusEntity],
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, _TEnergosbytPlusEntity],
         account: "Account",
         config_entry: ConfigEntry,
@@ -887,7 +888,7 @@ class EnergosbytPlusServiceCharges(_EnergosbytPlusChargesEntityBase):
         return f"account_{self._account.id}_servicecharges_{self._service_charge.id}"
 
     @property
-    def sensor_related_attributes(self):
+    def extra_state_attributes(self):
         service_charges = self._service_charge
         dev_presentation_enabled = self.is_dev_presentation_enabled
 
@@ -966,7 +967,7 @@ class EnergosbytPlusServiceCharges(_EnergosbytPlusChargesEntityBase):
     @classmethod
     async def async_refresh_account(
         cls: Type[_TEnergosbytPlusEntity],
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, _TEnergosbytPlusEntity],
         account: "Account",
         config_entry: ConfigEntry,
