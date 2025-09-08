@@ -38,10 +38,11 @@ from homeassistant.const import (
     CONF_SCAN_INTERVAL,
     CONF_USERNAME,
 )
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers import entity_platform
 from homeassistant.helpers.entity import Entity
 from homeassistant.helpers.event import async_track_time_interval
-from homeassistant.helpers.typing import ConfigType, HomeAssistantType, StateType
+from homeassistant.helpers.typing import ConfigType, StateType
 from homeassistant.util import as_local, utcnow
 
 from custom_components.energosbyt_plus._util import (
@@ -91,7 +92,7 @@ def make_common_async_setup_entry(
     entity_cls: Type["EnergosbytPlusEntity"], *args: Type["EnergosbytPlusEntity"]
 ):
     async def _async_setup_entry(
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         config_entry: ConfigEntry,
         async_add_devices,
     ):
@@ -126,7 +127,7 @@ def make_common_async_setup_entry(
 
 
 async def async_register_update_delegator(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     config_entry: ConfigEntry,
     platform: str,
     async_add_entities: AddEntitiesCallType,
@@ -148,7 +149,7 @@ async def async_register_update_delegator(
         await async_refresh_api_data(hass, config_entry)
 
 
-async def async_refresh_api_data(hass: HomeAssistantType, config_entry: ConfigEntry):
+async def async_refresh_api_data(hass: HomeAssistant, config_entry: ConfigEntry):
     entry_id = config_entry.entry_id
     api: "EnergosbytPlusAPI" = hass.data[DATA_API_OBJECTS][entry_id]
 
@@ -387,7 +388,7 @@ class EnergosbytPlusEntity(Entity):
     def device_state_attributes(self):
         """Return the attribute(s) of the sensor"""
 
-        attributes = dict(self.sensor_related_attributes or {})
+        attributes = dict(self.extra_state_attributes or {})  # <- изменено здесь
 
         if ATTR_ACCOUNT_ID not in attributes:
             attributes[ATTR_ACCOUNT_ID] = self._account.id
@@ -521,7 +522,7 @@ class EnergosbytPlusEntity(Entity):
     @abstractmethod
     async def async_refresh_account(
         cls: Type[_TEnergosbytPlusEntity],
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entities: Dict[Hashable, _TEnergosbytPlusEntity],
         account: "Account",
         config_entry: ConfigEntry,
@@ -553,8 +554,13 @@ class EnergosbytPlusEntity(Entity):
         raise NotImplementedError
 
     @property
-    @abstractmethod
     def sensor_related_attributes(self) -> Optional[Mapping[str, Any]]:
+        """Return the attribute(s) of the sensor"""
+        return self.extra_state_attributes
+
+    @property
+    @abstractmethod
+    def extra_state_attributes(self) -> Optional[Mapping[str, Any]]:
         raise NotImplementedError
 
     @property
