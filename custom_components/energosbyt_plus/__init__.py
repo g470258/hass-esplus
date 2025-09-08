@@ -20,9 +20,10 @@ from homeassistant import config_entries
 from homeassistant.components.binary_sensor import DOMAIN as BINARY_SENSOR_DOMAIN
 from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
-from homeassistant.helpers.typing import ConfigType, HomeAssistantType
+from homeassistant.helpers.typing import ConfigType
 
 from custom_components.energosbyt_plus._base import UpdateDelegatorsDataType
 from custom_components.energosbyt_plus._schema import CONFIG_ENTRY_SCHEMA
@@ -104,7 +105,7 @@ CONFIG_SCHEMA = vol.Schema(
 )
 
 
-async def async_setup(hass: HomeAssistantType, config: ConfigType):
+async def async_setup(hass: HomeAssistant, config: ConfigType):
     """Set up the Energosbyt Plus component."""
     domain_config = config.get(DOMAIN)
     if not domain_config:
@@ -192,7 +193,7 @@ async def async_setup(hass: HomeAssistantType, config: ConfigType):
 
 
 async def async_setup_entry(
-    hass: HomeAssistantType, config_entry: config_entries.ConfigEntry
+    hass: HomeAssistant, config_entry: config_entries.ConfigEntry
 ):
     branch_code = config_entry.data[CONF_BRANCH]
     username = config_entry.data[CONF_USERNAME]
@@ -308,13 +309,14 @@ async def async_setup_entry(
     hass.data.setdefault(DATA_UPDATE_DELEGATORS, {})[entry_id] = {}
 
     # Forward entry setup to sensor platform
-    for domain in (SENSOR_DOMAIN, BINARY_SENSOR_DOMAIN):
-        hass.async_create_task(
-            hass.config_entries.async_forward_entry_setup(
-                config_entry,
-                domain,
-            )
-        )
+    #for domain in (SENSOR_DOMAIN, BINARY_SENSOR_DOMAIN):
+    #    hass.async_create_task(
+    #        hass.config_entries.async_forward_entry_setups(
+    #            config_entry,
+    #            domain,
+    #        )
+    #    )
+    await hass.config_entries.async_forward_entry_setups(config_entry, (SENSOR_DOMAIN, BINARY_SENSOR_DOMAIN))
 
     # Create options update listener
     update_listener = config_entry.add_update_listener(async_reload_entry)
@@ -328,7 +330,7 @@ async def async_setup_entry(
 
 
 async def async_reload_entry(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     config_entry: config_entries.ConfigEntry,
 ) -> None:
     """Reload Energosbyt Plus entry"""
@@ -345,7 +347,7 @@ async def async_reload_entry(
 
 
 async def async_unload_entry(
-    hass: HomeAssistantType,
+    hass: HomeAssistant,
     config_entry: config_entries.ConfigEntry,
 ) -> bool:
     """Unload Energosbyt Plus entry"""
