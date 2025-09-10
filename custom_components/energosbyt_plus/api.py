@@ -415,6 +415,16 @@ class EnergosbytPlusAPI:
                 "meter_id": meter_id,
             },
         )
+    async def async_get_works(self, residential_object_id: str) -> Tuple["Work", ...]:
+        content = await self._async_api_get_request(
+             "/api/v1/object/work",
+             authenticated=True,
+             params={
+                  "object_id": residential_object_id,
+                  "branch_code": self._branch_code,
+            },
+        )
+        return Work.de_json_list(content["service"], self)
 
 
 @attr.s(kw_only=True, frozen=True, slots=True)
@@ -440,6 +450,28 @@ class _BaseDataItem:
         # noinspection PyArgumentList
         return tuple(cls.de_json(item, api, **kwargs) for item in data)
 
+@attr.s(kw_only=True, frozen=True, slots=True)
+class Work(_BaseDataItem):
+    service: bool = attr.ib()
+    type: str = attr.ib()
+    start: datetime = attr.ib()
+    end: datetime = attr.ib()
+    description: Optional[str] = attr.ib()
+
+    @classmethod
+    def de_json(
+        cls: Type[_TBaseDataItem],
+        data: Mapping[Hashable, Any],
+        api: Optional[EnergosbytPlusAPI] = None,
+    ) -> _TBaseDataItem:
+        return cls(
+            api=api,
+            service=data["service"],
+            type=data["type"],
+            start=datetime.fromtimestamp(data["start"]),
+            end=datetime.fromtimestamp(data["end"]),
+            description=data["desc"],
+        )
 
 @attr.s(kw_only=True, frozen=True, slots=True)
 class MeterCharacteristicsZone:
