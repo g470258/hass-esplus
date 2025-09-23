@@ -16,7 +16,7 @@ _ЛК &#xab;ЭнергосбыТ Плюс&#xbb;_ для _Home Assistant_
 
 <details>
   <summary>Информация о лицевом счёте</summary> 
-  <img src="https://raw.githubusercontent.com/alryaz/hass-energosbyt-plus/main/images/account.png" alt="Скриншот: Информация о лицевом счёте">
+  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/account.png" alt="Скриншот: Информация о лицевом счёте">
 </details>
 <details>
   <summary>Общие начисления</summary> 
@@ -24,19 +24,19 @@ _ЛК &#xab;ЭнергосбыТ Плюс&#xbb;_ для _Home Assistant_
 </details>
 <details>
   <summary>Начисления по услуге</summary> 
-  <img src="https://raw.githubusercontent.com/alryaz/hass-energosbyt-plus/main/images/service_charges.png" alt="Скриншот: Начисления по услуге">
+  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/service_charges.png" alt="Скриншот: Начисления по услуге">
 </details>
 <details>
   <summary>Последний зарегистрированный платёж</summary> 
-  <img src="https://raw.githubusercontent.com/alryaz/hass-energosbyt-plus/main/images/last_payment.png" alt="Скриншот: Последний зарегистрированный платёж">
+  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/last_payment.png" alt="Скриншот: Последний зарегистрированный платёж">
 </details>
 <details>
   <summary>Счётчик коммунальных услуг</summary> 
-  <img src="https://raw.githubusercontent.com/alryaz/hass-energosbyt-plus/main/images/meter.png" alt="Скриншот: Счётчик коммунальных услуг">
+  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/meter.png" alt="Скриншот: Счётчик коммунальных услуг">
 </details>
 <details>
   <summary>Служба отправки показаний</summary> 
-  <img src="https://raw.githubusercontent.com/alryaz/hass-energosbyt-plus/main/images/push_indications_service.png" alt="Скриншот: Служба отправки показаний">
+  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/push_indications_service.png" alt="Скриншот: Служба отправки показаний">
 </details>
 
 ## Установка
