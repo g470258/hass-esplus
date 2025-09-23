@@ -1,6 +1,6 @@
 {
     "domain": "energosbyt_plus",
-    "name": "Личный кабинет Энергосбыт.Т плюс",
+    "name": "ЛК Энергосбыт.Т плюс",
     "documentation": "https://github.com/g470258/hass-energosbyt-t-plus",
     "issue_tracker": "https://github.com/g470258/hass-energosbyt-t-plus/issues",
     "dependencies": [],
