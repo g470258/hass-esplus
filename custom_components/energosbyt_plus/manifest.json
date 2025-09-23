@@ -1,11 +1,11 @@
 {
     "domain": "energosbyt_plus",
-    "name": "Energosbyt Plus Personal Cabinet",
-    "documentation": "https://github.com/alryaz/hass-energosbyt-plus",
-    "issue_tracker": "https://github.com/alryaz/hass-energosbyt-plus/issues",
+    "name": "Личный кабинет Энергосбыт.Т плюс",
+    "documentation": "https://github.com/g470258/hass-energosbyt-t-plus",
+    "issue_tracker": "https://github.com/g470258/hass-energosbyt-t-plus/issues",
     "dependencies": [],
     "version": "0.1.0",
-    "codeowners": ["@alryaz"],
+    "codeowners": ["@g470258"],
     "requirements": [],
     "config_flow": true,
     "iot_class": "cloud_polling"
