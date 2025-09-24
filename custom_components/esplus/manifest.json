@@ -5,8 +5,10 @@
   "config_flow": false,
   "dependencies": [],
   "documentation": "https://github.com/g470258/hass-esplus",
+  "issue_tracker": "https://github.com/g470258/hass-esplus/issues",
   "iot_class": "cloud_polling",
   "loggers": ["custom_components.esplus"],
   "requirements": [],
   "version": "2.0.1"
 }
+
