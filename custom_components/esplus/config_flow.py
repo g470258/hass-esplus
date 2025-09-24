@@ -11,12 +11,12 @@ from homeassistant.const import CONF_DEFAULT, CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.typing import ConfigType
 
-from custom_components.energosbyt_plus.api import (
+from custom_components.esplus.api import (
     Account,
     EnergosbytPlusAPI,
     EnergosbytPlusException,
 )
-from custom_components.energosbyt_plus.const import CONF_ACCOUNTS, CONF_BRANCH, DOMAIN
+from custom_components.esplus.const import CONF_ACCOUNTS, CONF_BRANCH, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -185,3 +185,4 @@ class EnergosbytPlusConfigFlow(ConfigFlow, domain=DOMAIN):
             title=self.make_entry_title(branch_code, username),
             data={CONF_USERNAME: username, CONF_BRANCH: branch_code},
         )
+
