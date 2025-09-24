@@ -5,5 +5,5 @@
   "render_readme": true,
   "country": ["RU"],
   "homeassistant": "2025.5.0",
-  "iot_class": "Cloud Polling"
+  "iot_class": "cloud_polling"
 }
