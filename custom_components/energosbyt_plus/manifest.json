@@ -1,6 +1,6 @@
 {
     "domain": "energosbyt_plus",
-    "name": "ЛК ЭнергосбытТ Плюс",
+    "name": "ЛК ЭнергосбытТ+",
     "documentation": "https://github.com/g470258/hass-energosbyt-t-plus",
     "issue_tracker": "https://github.com/g470258/hass-energosbyt-t-plus/issues",
     "dependencies": [],
@@ -10,5 +10,6 @@
     "config_flow": true,
     "iot_class": "cloud_polling"
 }
+
 
 
