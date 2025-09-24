@@ -11,8 +11,8 @@ from homeassistant.const import (
 )
 from homeassistant.helpers import config_validation as cv
 
-from custom_components.energosbyt_plus._util import IS_IN_RUSSIA
-from custom_components.energosbyt_plus.const import (
+from custom_components.esplus._util import IS_IN_RUSSIA
+from custom_components.esplus.const import (
     CONF_ACCOUNTS,
     CONF_CHARGES,
     CONF_BRANCH,
@@ -183,3 +183,4 @@ CONFIG_ENTRY_SCHEMA = vol.Schema(
     },
     extra=vol.PREVENT_EXTRA,
 )
+
