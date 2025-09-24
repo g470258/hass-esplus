@@ -26,7 +26,7 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.typing import ConfigType
 
 from custom_components.esplus._base import UpdateDelegatorsDataType
-from custom_components.eesplus._schema import CONFIG_ENTRY_SCHEMA
+from custom_components.esplus._schema import CONFIG_ENTRY_SCHEMA
 from custom_components.esplus._util import (
     IS_IN_RUSSIA,
     _find_existing_entry,
@@ -392,5 +392,6 @@ async def async_unload_entry(
         )
 
     return unload_ok
+
 
 
