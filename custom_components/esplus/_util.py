@@ -18,11 +18,11 @@ from homeassistant.const import CONF_USERNAME
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import EntityPlatform
 
-from custom_components.energosbyt_plus.api import (
+from custom_components.esplus.api import (
     EnergosbytPlusAPI,
     EnergosbytPlusException,
 )
-from custom_components.energosbyt_plus.const import CONF_BRANCH, DOMAIN
+from custom_components.esplus.const import CONF_BRANCH, DOMAIN
 
 
 def _make_log_prefix(
@@ -116,3 +116,4 @@ async def with_auto_auth(
     except EnergosbytPlusException:
         await api.async_authenticate()
         return await async_getter(*args, **kwargs)
+
