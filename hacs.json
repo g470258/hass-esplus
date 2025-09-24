@@ -5,6 +5,4 @@
   "render_readme": true,
   "country": ["RU"],
   "homeassistant": "2025.5.0",
-  "iot_class": "cloud_polling",
-  "category": "integration"
 }
