@@ -55,7 +55,7 @@ from custom_components.esplus.const import (
 )
 
 if TYPE_CHECKING:
-    from custom_components.energosbyt_plus.sensor import EnergosbytPlusAccount
+    from custom_components.esplus.sensor import EnergosbytPlusAccount
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -392,4 +392,5 @@ async def async_unload_entry(
         )
 
     return unload_ok
+
 
