@@ -25,16 +25,16 @@ from homeassistant.exceptions import ConfigEntryNotReady
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.typing import ConfigType
 
-from custom_components.energosbyt_plus._base import UpdateDelegatorsDataType
-from custom_components.energosbyt_plus._schema import CONFIG_ENTRY_SCHEMA
-from custom_components.energosbyt_plus._util import (
+from custom_components.esplus._base import UpdateDelegatorsDataType
+from custom_components.eesplus._schema import CONFIG_ENTRY_SCHEMA
+from custom_components.esplus._util import (
     IS_IN_RUSSIA,
     _find_existing_entry,
     _make_log_prefix,
     mask_username,
 )
-from custom_components.energosbyt_plus.api import EnergosbytPlusAPI
-from custom_components.energosbyt_plus.const import (
+from custom_components.esplus.api import EnergosbytPlusAPI
+from custom_components.esplus.const import (
     CONF_ACCOUNTS,
     CONF_CHARGES,
     CONF_BRANCH,
@@ -254,7 +254,7 @@ async def async_setup_entry(
         )
     )
 
-    from custom_components.energosbyt_plus.api import EnergosbytPlusException
+    from custom_components.esplus.api import EnergosbytPlusException
 
     try:
         api_object = EnergosbytPlusAPI(
@@ -392,3 +392,4 @@ async def async_unload_entry(
         )
 
     return unload_ok
+
