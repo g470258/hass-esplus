@@ -1,4 +1,4 @@
-_ЛК &#xab;ЭнергосбыТ Плюс&#xbb;_ для _Home Assistant_
+_ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 ==================================================
 
 <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/master/images/header.png" alt="Логотип интеграции">
@@ -48,7 +48,7 @@ _ЛК &#xab;ЭнергосбыТ Плюс&#xbb;_ для _Home Assistant_
 1. Перезапустите Home Assistant
 
 ## Конфигурация компонента:
-- Вариант А: Через _Интеграции_ (в поиске - "ЭнергосбыТ Плюс" или "EnergosbyT Plus")
+- Вариант А: Через _Интеграции_ (в поиске - "ЛК ЭнергосбыТ+")
 - Вариант Б: YAML
 
 ### Пример конфигурации YAML
