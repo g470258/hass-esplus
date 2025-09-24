@@ -2,7 +2,7 @@ push_indications:
   description: 'Передать показания в личный кабинет'
   target:
     entity:
-      device_class: energosbyt_plus_meter
+      device_class: esplus_meter
   fields:
     indications:
       description: 'Список показаний (от 1 до 3) для тарифов: T1, T2, T3'
@@ -49,7 +49,7 @@ get_payments:
   description: "Получить перечень платежей, связанных с лицевым счётом, которые находятся внутри заданного периода"
   target:
     entity:
-      device_class: energosbyt_plus_account
+      device_class: esplus_account
   fields:
     start:
       description: "Дата начала периода"
@@ -70,7 +70,7 @@ get_invoices:
   description: "Получить перечень квитанций, связанных с лицевым счётом, которые находятся внутри заданного периода"
   target:
     entity:
-      device_class: energosbyt_plus_account
+      device_class: esplus_account
   fields:
     start:
       description: "Дата начала периода"
@@ -85,4 +85,5 @@ get_invoices:
       advanced: false
       selector:
         text:
+
           multiline: false
