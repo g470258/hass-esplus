@@ -2,7 +2,7 @@
   "domain": "esplus",
   "name": "ЛК ЭнергосбыТ+",
   "codeowners": ["@g470258"],
-  "config_flow": false,
+  "config_flow": true,
   "dependencies": [],
   "documentation": "https://github.com/g470258/hass-esplus",
   "issue_tracker": "https://github.com/g470258/hass-esplus/issues",
@@ -11,4 +11,5 @@
   "requirements": [],
   "version": "2.0.1"
 }
+
 
