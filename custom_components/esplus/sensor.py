@@ -35,16 +35,16 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.util import slugify
 
-from custom_components.energosbyt_plus._base import (
+from custom_components.esplus._base import (
     EnergosbytPlusEntity,
     SupportedServicesType,
     make_common_async_setup_entry,
 )
-from custom_components.energosbyt_plus._util import (
+from custom_components.esplus._util import (
     dev_presentation_replacer,
     with_auto_auth,
 )
-from custom_components.energosbyt_plus.api import (
+from custom_components.esplus.api import (
     Account,
     AccountBalance,
     AccountCharges,
@@ -53,7 +53,7 @@ from custom_components.energosbyt_plus.api import (
     MeterCharacteristics,
     ServiceCharge,
 )
-from custom_components.energosbyt_plus.const import (
+from custom_components.esplus.const import (
     ATTR_ACCEPTED,
     ATTR_ACCOUNT_CODE,
     ATTR_ACCURACY,
@@ -1012,3 +1012,4 @@ async_setup_entry = make_common_async_setup_entry(
     EnergosbytPlusServiceCharges,
     EnergosbytPlusMeter,
 )
+
