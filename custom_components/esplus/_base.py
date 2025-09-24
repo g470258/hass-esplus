@@ -45,14 +45,14 @@ from homeassistant.helpers.event import async_track_time_interval
 from homeassistant.helpers.typing import ConfigType, StateType
 from homeassistant.util import as_local, utcnow
 
-from custom_components.energosbyt_plus._util import (
+from custom_components.esplus._util import (
     IS_IN_RUSSIA,
     dev_presentation_replacer,
     mask_username,
     with_auto_auth,
 )
-from custom_components.energosbyt_plus.api import Account, EnergosbytPlusAPI
-from custom_components.energosbyt_plus.const import (
+from custom_components.esplus.api import Account, EnergosbytPlusAPI
+from custom_components.esplus.const import (
     ATTRIBUTION_EN,
     ATTRIBUTION_RU,
     ATTR_ACCOUNT_CODE,
@@ -591,4 +591,5 @@ class EnergosbytPlusEntity(Entity):
                     self.platform.async_register_entity_service(
                         service, schema, "async_service_" + service, features
                     )
+
 
