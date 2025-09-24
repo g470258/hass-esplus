@@ -4,7 +4,7 @@
   "zip_release": false,
   "render_readme": true,
   "domains": ["sensor", "binary_sensor"],
-  "country": "ru",
+  "country": ["ru"],
   "homeassistant": "2025.5.0",
   "iot_class": "Cloud Polling"
 }
