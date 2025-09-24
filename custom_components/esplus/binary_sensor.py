@@ -30,9 +30,9 @@ from custom_components.energosbyt_plus._base import (
     EnergosbytPlusEntity,
     make_common_async_setup_entry,
 )
-from custom_components.energosbyt_plus._util import dev_presentation_replacer
-from custom_components.energosbyt_plus.api import Account, Payment, Work
-from custom_components.energosbyt_plus.const import (
+from custom_components.esplus._util import dev_presentation_replacer
+from custom_components.esplus.api import Account, Payment, Work
+from custom_components.esplus.const import (
     ATTR_AMOUNT,
     ATTR_PAID_AT,
     ATTR_PERIOD,
@@ -311,6 +311,7 @@ class EnergosbytPlusLastPayment(EnergosbytPlusEntity, BinarySensorEntity):
     @property
     def device_class(self) -> Optional[str]:
         return DOMAIN + "_payment"
+
 
 
 async_setup_entry = make_common_async_setup_entry(EnergosbytPlusLastPayment, EnergosbytPlusWorks)
