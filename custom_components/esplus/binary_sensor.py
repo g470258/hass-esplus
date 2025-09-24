@@ -26,7 +26,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType, StateType
 from homeassistant.util import slugify
 
-from custom_components.energosbyt_plus._base import (
+from custom_components.esplus._base import (
     EnergosbytPlusEntity,
     make_common_async_setup_entry,
 )
@@ -315,3 +315,4 @@ class EnergosbytPlusLastPayment(EnergosbytPlusEntity, BinarySensorEntity):
 
 
 async_setup_entry = make_common_async_setup_entry(EnergosbytPlusLastPayment, EnergosbytPlusWorks)
+
