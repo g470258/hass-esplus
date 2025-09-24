@@ -1,15 +1,12 @@
 {
-    "domain": "energosbyt_plus",
-    "name": "ЛК ЭнергосбытТ+",
-    "documentation": "https://github.com/g470258/hass-energosbyt-t-plus",
-    "issue_tracker": "https://github.com/g470258/hass-energosbyt-t-plus/issues",
-    "dependencies": [],
-    "version": "2.0",
-    "codeowners": ["@g470258"],
-    "requirements": [],
-    "config_flow": true,
-    "iot_class": "cloud_polling"
+  "domain": "esplus",
+  "name": "ЛК ЭнергосбыТ+",
+  "codeowners": ["@g470258"],
+  "config_flow": false,
+  "dependencies": [],
+  "documentation": "https://github.com/g470258/hass-esplus",
+  "iot_class": "cloud_polling",
+  "loggers": ["custom_components.esplus"],
+  "requirements": [],
+  "version": "2.0.1"
 }
-
-
-
