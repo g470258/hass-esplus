@@ -3,6 +3,5 @@
   "content_in_root": false,
   "zip_release": false,
   "render_readme": true,
-  "country": ["RU"],
   "homeassistant": "2025.5.0",
 }
