@@ -1,7 +1,7 @@
-"""Constants for energosbyt_plus integration"""
+"""Constants for esplus integration"""
 from typing import Final
 
-DOMAIN: Final = "energosbyt_plus"
+DOMAIN: Final = "esplus"
 
 ATTRIBUTION_EN: Final = "Data acquired from EnergosbyT.Plus"
 ATTRIBUTION_RU: Final = "Данные получены с ЭнергосбыТ.Плюс"
@@ -125,3 +125,4 @@ FORMAT_VAR_TYPE_EN: Final = "type_en"
 FORMAT_VAR_TYPE_RU: Final = "type_ru"
 ATTR_SERVICES: Final = "services"
 CONF_BRANCH: Final = "branch"
+
