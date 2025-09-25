@@ -21,13 +21,20 @@ push_indications:
       selector:
         boolean:
     notification:
-      description: 'Показывать уведомление при успешной передаче'
+      description: 'Показывать уведомление в интерфейсе HA (persistent_notification)'
       required: false
-      advanced: false
+      advanced: true
       default: false
-      example: 'true'
+      example: 'false'
       selector:
         boolean:
+    notification_service:
+      description: 'Сервис уведомлений, например telegram, telegram_user, mobile_app, без notify.'
+      required: false
+      advanced: false
+      example: 'telegram'
+      selector:
+        text:
     ignore_period:
       description: 'Игнорировать ограничения по периоду'
       required: false

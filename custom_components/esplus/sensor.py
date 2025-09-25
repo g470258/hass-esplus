@@ -143,10 +143,11 @@ SERVICE_PUSH_INDICATIONS_SCHEMA: Final = vol.All(
             vol.Optional(ATTR_IGNORE_PERIOD, default=False): cv.boolean,
             vol.Optional(ATTR_IGNORE_INDICATIONS, default=False): cv.boolean,
             vol.Optional(ATTR_INCREMENTAL, default=False): cv.boolean,
-            vol.Optional("notification"): lambda x: x,
+            vol.Optional("notification", default=False): cv.boolean,
+            vol.Optional("notification_service"): cv.string,
         }
     ),
-    cv.deprecated("notification"),
+
 )
 
 _SERVICE_SCHEMA_BASE_DATED: Final = {
@@ -642,7 +643,7 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
     async def async_service_push_indications(self, **call_data):
         """
         Push indications entity service.
-        :param call_data: Parameters for service call
+        :param call_ Parameters for service call
         :return:
         """
         _LOGGER.info(self.log_prefix + "Begin handling indications submission")
@@ -659,13 +660,33 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
 
             event_data[ATTR_INDICATIONS] = dict(indications)
 
-            await with_auto_auth(
+            # Получаем ответ от API
+            result = await with_auto_auth(
                 meter.api,
                 meter.async_push_indications,
                 **indications,
                 ignore_periods=call_data[ATTR_IGNORE_PERIOD],
                 ignore_values=call_data[ATTR_IGNORE_INDICATIONS],
             )
+
+            # Логируем ответ от API
+            _LOGGER.info(f"API Response: {result}")
+
+            # Извлекаем сообщение из ответа API
+            if result is not None and isinstance(result, dict):
+                api_message = result.get("message", "успешно переданы")
+            elif result is None:
+                api_message = "успешно переданы"
+            else:
+                api_message = "успешно переданы"
+
+            # Добавляем переданные показания к сообщению
+            sent_indications = ", ".join([f"{k}: {v}" for k, v in indications.items()])
+            message_with_indications = f"Данные по счётчику {self._meter.number} {api_message}. Показания: {sent_indications}"
+
+            event_data[ATTR_COMMENT] = message_with_indications
+            event_data[ATTR_SUCCESS] = True
+            self.async_schedule_update_ha_state(force_refresh=True)
 
         except EnergosbytPlusException as e:
             event_data[ATTR_COMMENT] = "API error: %s" % e
@@ -676,12 +697,62 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
             _LOGGER.error(event_data[ATTR_COMMENT])
             raise
 
-        else:
-            event_data[ATTR_COMMENT] = "Indications submitted successfully"
-            event_data[ATTR_SUCCESS] = True
-            self.async_schedule_update_ha_state(force_refresh=True)
-
         finally:
+            notification = call_data.get("notification", False)
+            notification_service = call_data.get("notification_service", None)
+
+            message = event_data[ATTR_COMMENT]
+
+            # Общий заголовок
+            title = "ЭнергосбыТ+ передача показаний"
+
+            # persistent_notification
+            if notification:
+                await self.hass.services.async_call(
+                    "persistent_notification",
+                    "create",
+                    {
+                        "title": title,
+                        "message": message,
+                        "notification_id": "esplus_push_indications"
+                    }
+                )
+
+            # notify.* сервис
+            if notification_service:
+                service_name = notification_service
+                if self.hass.services.has_service("notify", service_name):
+                    # Проверяем, поддерживает ли сервис `title`
+                    notify_service = self.hass.services.async_services().get("notify", {}).get(service_name)
+                    if notify_service:
+                        # notify_service — это объект Service, а не словарь
+                        # Проверяем, есть ли поле 'title' в notify_service.fields
+                        if hasattr(notify_service, 'fields') and "title" in notify_service.fields:
+                            # Сервис поддерживает `title`
+                            await self.hass.services.async_call(
+                                "notify",
+                                service_name,
+                                {
+                                    "title": title,
+                                    "message": message
+                                }
+                            )
+                        else:
+                            # Не поддерживает `title` — включаем в сообщение
+                            full_message = f"{title}\n{message}"
+                            await self.hass.services.async_call(
+                                "notify",
+                                service_name,
+                                {
+                                    "message": full_message
+                                }
+                            )
+                    else:
+                        _LOGGER.warning(f"Service notify.{service_name} does not exist.")
+                else:
+                    _LOGGER.warning(f"Service notify.{service_name} does not exist.")
+
+
             self._fire_callback_event(
                 call_data,
                 event_data,
@@ -689,8 +760,7 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
             )
 
             _LOGGER.info(self.log_prefix + "End handling indications submission")
-
-
+            
 class _EnergosbytPlusChargesEntityBase(EnergosbytPlusEntity):
     _collective_update_futures: ClassVar[Dict[str, asyncio.Future]] = {}
 
