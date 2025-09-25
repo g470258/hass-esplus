@@ -396,7 +396,7 @@ class EnergosbytPlusAPI:
         meter_id: str,
         *args: Union[int, float],
         **kwargs: Union[int, float],
-    ) -> None:
+    ) -> Any:
         if args:
             for t_index, arg in enumerate(args, start=1):
                 assert (
@@ -406,7 +406,7 @@ class EnergosbytPlusAPI:
 
         assert kwargs, "at least one indication must be provided"
 
-        await self._async_api_post_request(
+        response = await self._async_api_post_request(
             "/api/v1/meter/data/send",
             authenticated=True,
             json={
@@ -415,6 +415,7 @@ class EnergosbytPlusAPI:
                 "meter_id": meter_id,
             },
         )
+        return response
     async def async_get_works(self, residential_object_id: str) -> Tuple["Work", ...]:
         content = await self._async_api_get_request(
              "/api/v1/object/work",
