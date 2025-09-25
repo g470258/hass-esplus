@@ -1,7 +1,7 @@
 _ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 ==================================================
 
-<img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/master/images/header.png" alt="Логотип интеграции">
+<img src="https://raw.githubusercontent.com/g470258/hass-esplus/refs/heads/main/images/header.png" alt="Логотип интеграции">
 
 > Предоставление информации о текущем состоянии ваших лицевых счетов в ЛК ЭнергосбыТ Плюс.
 > Передача показаний по счётчикам.
@@ -16,19 +16,19 @@ _ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 
 <details>
   <summary>Информация о лицевом счёте</summary> 
-  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/account.png" alt="Скриншот: Информация о лицевом счёте">
+  <img src="https://raw.githubusercontent.com/g470258/hass-esplus/main/images/account.png" alt="Скриншот: Информация о лицевом счёте">
 </details>
 <details>
   <summary>Общие начисления</summary> 
-  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/charges.png" alt="Скриншот: Общие начисления">
+  <img src="https://raw.githubusercontent.com/g470258/hass-esplus/main/images/charges.png" alt="Скриншот: Общие начисления">
 </details>
 <details>
   <summary>Начисления по услуге</summary> 
-  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/service_charges.png" alt="Скриншот: Начисления по услуге">
+  <img src="https://raw.githubusercontent.com/g470258/hass-esplus/main/images/service_charges.png" alt="Скриншот: Начисления по услуге">
 </details>
 <details>
   <summary>Последний зарегистрированный платёж</summary> 
-  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/last_payment.png" alt="Скриншот: Последний зарегистрированный платёж">
+  <img src="https://raw.githubusercontent.com/g470258//hass-esplus/main/images/last_payment.png" alt="Скриншот: Последний зарегистрированный платёж">
 </details>
 <details>
   <summary>Счётчик коммунальных услуг</summary> 
@@ -36,7 +36,7 @@ _ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 </details>
 <details>
   <summary>Служба отправки показаний</summary> 
-  <img src="https://raw.githubusercontent.com/g470258/hass-energosbyt-t-plus/main/images/push_indications_service.png" alt="Скриншот: Служба отправки показаний">
+  <img src="https://raw.githubusercontent.com/g470258/hass-esplus/main/images/push_indications_service.png" alt="Скриншот: Служба отправки показаний">
 </details>
 
 ## Установка
@@ -44,11 +44,11 @@ _ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 1. Установите
    HACS ([инструкция по установке на оф. сайте](https://hacs.xyz/docs/installation/installation/))
 1. Найдите `ЛК ЭнергосбыТ+` в поиске по интеграциям <sup>1</sup>
-1. Установите последнюю версию компонента, нажав на кнопку `Установить` (`Install`)
+1. Установите последнюю версию компонента, нажав на кнопку `Установить` 
 1. Перезапустите Home Assistant
 
 ## Конфигурация компонента:
-- Вариант А: Через _Интеграции_ (в поиске - "ЛК ЭнергосбыТ+")
+- Вариант А: Через _Интеграции_ (в поиске - "ЛК ЭнергосбыТ+") - рекомендуемый способ
 - Вариант Б: YAML
 
 ### Пример конфигурации YAML
@@ -180,7 +180,7 @@ esplus:
 
 ## Использование
 
-### Служба передачи показаний - `energosbyt_plus.push_indications`
+### Служба передачи показаний - `esplus.push_indications`
 
 Служба передачи показаний позволяет отправлять показания по счётчикам в личный кабинет, и
 имеет следующий набор параметров:
