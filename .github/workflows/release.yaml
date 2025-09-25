@@ -23,7 +23,7 @@ jobs:
       - name: "ZIP the integration directory"
         shell: "bash"
         run: |
-          cd "${{ github.workspace }}custom_components/esplus"
+          cd "${{ github.workspace }}/custom_components/esplus"
           zip esplus.zip -r ./
 
       - name: "Upload the ZIP file to the release"
