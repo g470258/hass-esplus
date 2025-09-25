@@ -54,7 +54,7 @@ _ЛК &#xab;ЭнергосбыТ+&#xbb;_ для _Home Assistant_
 ### Пример конфигурации YAML
 ```yaml
 ...
-energosbyt_plus:
+esplus:
   # Выбран филиал в г. Киров
   branch: kirov
   username: 1234567890
@@ -65,7 +65,7 @@ energosbyt_plus:
 ### Описание конфигурационной схемы
 ```yaml
 ...
-energosbyt_plus:
+esplus:
   
   # Филиал / регион
   # Доступные филиалы на момент релиза:
@@ -140,7 +140,7 @@ energosbyt_plus:
 Для реализации белого списка, конфигурация выполняется следующим образом:
 ```yaml
 ...
-energosbyt_plus:
+esplus:
   ...
   # Выборочное исключение лицевых счетов
   accounts:
@@ -155,7 +155,7 @@ energosbyt_plus:
 Для реализации белого списка, конфигурация выполняется следующим образом:
 ```yaml
 ...
-energosbyt_plus:
+esplus:
   ...
   # Отключение добавление лицевых счетов по умолчанию
   default: false
@@ -171,7 +171,7 @@ energosbyt_plus:
 Также возможно использовать укороченную запись:
 ```yaml
 ...
-energosbyt_plus:
+esplus:
   ...
   # Данный пример функционально эквивалентен предыдущему примеру
   default: false
@@ -204,7 +204,7 @@ energosbyt_plus:
   отправлены<sup>1</sup>.
   
 ```yaml
-service: energosbyt_plus.push_indications
+action: esplus..push_indications
 data:
   indications: "123, 456, 789"
 target:
@@ -214,7 +214,7 @@ target:
 ... или, с помощью именованного массива:
 
 ```yaml
-service: energosbyt_plus.push_indications
+action: esplus..push_indications
 data:
   indications:
     t1: 123
@@ -227,7 +227,7 @@ target:
 ... или, с помощью списка:
 
 ```yaml
-service: energosbyt_plus.push_indications
+action: esplus..push_indications
 data:
   indications: [123, 456, 789]
 target:
@@ -245,8 +245,8 @@ target:
   отправлены<sup>1</sup>.
   
 ```yaml
-service: energosbyt_plus.push_indications
-data_template:
+action: esplus..push_indications
+data:
   indications: [123, 456, 789]
   ignore_indications: true
   ignore_periods: true
@@ -266,10 +266,23 @@ target:
 а не _123_, _456_ и _789_. 
   
 ```yaml
-service: energosbyt_plus.push_indications
-data_template:
+action: esplus.push_indications
+data:
   indications: [123, 456, 789]
   incremental: true
+target:
+  entity_id: sensor.1243145122_meter_123456789
+```
+##### 4. Уведомление об отправке
+Два варианта(можно использовать одновременно):
+- Создание persistent_notification(Уведомления в ХА).
+- Отправке уведомления через сервисы notify.*(например, telegram, mobile_app_XXX).
+```yaml
+action: esplus.push_indications
+data:
+  indications: [123, 456, 789]
+  notification: true   #создание persistent_notification
+  notification_service: telegram_gleb #отправка в сервис notify.telegram_gleb
 target:
   entity_id: sensor.1243145122_meter_123456789
 ```
