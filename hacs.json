@@ -4,5 +4,5 @@
   "zip_release": true,
   "filename": "esplus.zip",
   "homeassistant": "2025.5.0",
-  "country": "RU"
+  "country": ["RU"]
 }
