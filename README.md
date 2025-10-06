@@ -276,7 +276,7 @@ target:
 ##### 4. Уведомление об отправке
 Два варианта(можно использовать одновременно):
 - Создание persistent_notification(Уведомления в ХА).
-- Отправке уведомления через сервисы notify.*(например, telegram, mobile_app_XXX).
+- Отправка уведомления через сервисы notify.*(например: telegram, mobile_app_XXX).
 ```yaml
 action: esplus.push_indications
 data:
