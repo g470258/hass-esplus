@@ -9,8 +9,9 @@
   "issue_tracker": "https://github.com/g470258/hass-esplus/issues",
   "loggers": ["custom_components.esplus"],
   "requirements": [],
-  "version": "2.0.4"
+  "version": "2.0.5"
 }
+
 
 
 
