@@ -144,7 +144,7 @@ SERVICE_PUSH_INDICATIONS_SCHEMA: Final = vol.All(
             vol.Optional(ATTR_IGNORE_INDICATIONS, default=False): cv.boolean,
             vol.Optional(ATTR_INCREMENTAL, default=False): cv.boolean,
             vol.Optional("notification", default=False): cv.boolean,
-            vol.Optional("notification_service"): cv.string,
+            vol.Optional("notification_service"): cv.entity_id,
         }
     ),
 
@@ -718,39 +718,31 @@ class EnergosbytPlusMeter(EnergosbytPlusEntity):
                     }
                 )
 
-            # notify.* сервис
+            # notify.* сервис (новый формат)
             if notification_service:
-                service_name = notification_service
-                if self.hass.services.has_service("notify", service_name):
-                    # Проверяем, поддерживает ли сервис `title`
-                    notify_service = self.hass.services.async_services().get("notify", {}).get(service_name)
-                    if notify_service:
-                        # notify_service — это объект Service, а не словарь
-                        # Проверяем, есть ли поле 'title' в notify_service.fields
-                        if hasattr(notify_service, 'fields') and "title" in notify_service.fields:
-                            # Сервис поддерживает `title`
+                target_entity_id = notification_service
+                # Вызываем универсальную службу notify.send_message
+                if self.hass.services.has_service("notify", "send_message"):
+                    entity_state = self.hass.states.get(target_entity_id)
+                    if entity_state:
+                        # Проверяем, что сущность из домена notify
+                        if entity_state.domain == "notify":
+                            # Вызываем notify.send_message с entity_id и title на верхнем уровне
                             await self.hass.services.async_call(
                                 "notify",
-                                service_name,
+                                "send_message",
                                 {
-                                    "title": title,
-                                    "message": message
+                                    "message": message,
+                                    "entity_id": target_entity_id,  # <-- Правильно: на верхнем уровне
+                                    "title": title                 # <-- Правильно: на верхнем уровне
                                 }
                             )
                         else:
-                            # Не поддерживает `title` — включаем в сообщение
-                            full_message = f"{title}\n{message}"
-                            await self.hass.services.async_call(
-                                "notify",
-                                service_name,
-                                {
-                                    "message": full_message
-                                }
-                            )
+                            _LOGGER.warning(f"Target entity {target_entity_id} is not a notify entity.")
                     else:
-                        _LOGGER.warning(f"Service notify.{service_name} does not exist.")
+                        _LOGGER.warning(f"Target entity {target_entity_id} not found.")
                 else:
-                    _LOGGER.warning(f"Service notify.{service_name} does not exist.")
+                    _LOGGER.warning("notify.send_message service does not exist.")
 
 
             self._fire_callback_event(

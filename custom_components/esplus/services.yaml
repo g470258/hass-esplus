@@ -29,12 +29,14 @@ push_indications:
       selector:
         boolean:
     notification_service:
-      description: 'Сервис уведомлений, например telegram, telegram_user, mobile_app, без notify.'
+      description: 'Уведомление в telegram'
       required: false
       advanced: false
-      example: 'telegram'
+      example: 'notify.telegram'
       selector:
-        text:
+        entity:
+          domain: 'notify'
+          integration: 'telegram_bot'
     ignore_period:
       description: 'Игнорировать ограничения по периоду'
       required: false
