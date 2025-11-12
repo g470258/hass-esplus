@@ -276,13 +276,13 @@ target:
 ##### 4. Уведомление об отправке
 Два варианта(можно использовать одновременно):
 - Создание persistent_notification(Уведомления в ХА).
-- Отправка уведомления через сервисы notify.*(например: telegram, mobile_app_XXX).
+- Отправка уведомления через telegram.
 ```yaml
 action: esplus.push_indications
 data:
   indications: [123, 456, 789]
   notification: true   #создание persistent_notification
-  notification_service: telegram_gleb #отправка в сервис notify.telegram_gleb
+  notification_service: notify.telegram_bot_gleb
 target:
   entity_id: sensor.1243145122_meter_123456789
 ```
