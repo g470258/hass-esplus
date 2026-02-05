@@ -637,7 +637,7 @@ class Meter(_BaseDataItem):
             period_month_name, _, period_year = accepted["period"].partition(" ")
             accepted_period = date(
                 year=int(period_year),
-                month=_CAPITAL_MONTH_NAMES.index(period_month_name),
+                month=_CAPITAL_MONTH_NAMES.index(period_month_name) + 1,
                 day=1,
             )
 
